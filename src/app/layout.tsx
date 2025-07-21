@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { type_second } from "./functions/fonts";
 
 export const metadata: Metadata = {
     title: "Dogs",
@@ -13,8 +13,8 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
-            <body>{children}</body>
+        <html lang="pt-BR">
+            <body className={type_second.variable}>{children}</body>
         </html>
     );
 }
