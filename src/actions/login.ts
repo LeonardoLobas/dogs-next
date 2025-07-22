@@ -1,5 +1,6 @@
 "use server";
 
+import { TOKEN_POST } from "@/functions/api";
 import apiError from "@/functions/api-error";
 import { cookies } from "next/headers";
 export default async function login(
@@ -11,13 +12,11 @@ export default async function login(
 
     try {
         if (!username || !password) throw new Error("Preencha os dados");
-        const response = await fetch(
-            "https://dogsapi.origamid.dev/json/jwt-auth/v1/token",
-            {
-                method: "POST",
-                body: formData,
-            }
-        );
+        const { url } = TOKEN_POST();
+        const response = await fetch(url, {
+            method: "POST",
+            body: formData,
+        });
         if (!response.ok) throw new Error("Senha ou usuário inválidos");
         const data = await response.json();
 
