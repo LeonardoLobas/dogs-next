@@ -8,9 +8,15 @@ export default async function Header() {
         <header className={styles.header}>
             <nav className={`${styles.nav} container`}>
                 <Link className={styles.logo} href={"/"}>
-                    <Image src={"/assets/dogs.svg"} alt="Dogs" width={28} height={22} priority />
+                    <Image
+                        src={"/assets/dogs.svg"}
+                        alt="Dogs"
+                        width={28}
+                        height={22}
+                        priority
+                    />
                 </Link>
-                <Link className={styles.login} href={"/Login"}>
+                <Link className={styles.login} href={"/login"}>
                     Login / Criar
                 </Link>
             </nav>
