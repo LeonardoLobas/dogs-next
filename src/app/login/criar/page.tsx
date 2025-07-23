@@ -1,3 +1,4 @@
+import LoginCriarForm from "@/components/login/login-criar-form";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -9,6 +10,7 @@ export default async function PageCriarSenha() {
     return (
         <div className="animeLeft">
             <h1 className="title">Cadastre-se</h1>
+            <LoginCriarForm />
         </div>
     );
 }

@@ -1,3 +1,4 @@
+import LoginPerdeuForm from "@/components/login/login-perdeu-form";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -6,8 +7,9 @@ export const metadata: Metadata = {
 };
 export default async function PagePerdeuSenha() {
     return (
-        <div>
-            <h1>PagePerdeuSenha</h1>
+        <div className="animeLeft">
+            <h1 className="title">Perdeu a senha ?</h1>
+            <LoginPerdeuForm />
         </div>
     );
 }
