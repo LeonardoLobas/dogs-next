@@ -1,21 +1,34 @@
-"use server";
+'use server';
 
-export type Photo = {
-    id: number;
-    author: string;
-    title: string;
-    date: string;
-    src: string;
-    peso: string;
-    idade: string;
-    acessos: string;
-    total_comments: string;
+import { PHOTO_GET } from '@/functions/api';
+import apiError from '@/functions/api-error';
+import { Photo } from './photos-get';
+
+export type Comment = {
+  comment_ID: string;
+  comment_post_ID: string;
+  comment_author: string;
+  comment_content: string;
 };
 
-export default async function photosGet(): Promise<Photo[]> {
-    const response = await fetch(
-        "https://dogsapi.origamid.dev/json/api/photo/?_page=1&_total=6&_user=0"
-    );
-    const data = await response.json();
-    return data;
+export type PhotoData = {
+  photo: Photo;
+  comments: Comment[];
+};
+
+export default async function photoGet(id: string) {
+  try {
+    const { url } = PHOTO_GET(id);
+    const response = await fetch(url, {
+      next: {
+        revalidate: 60,
+        tags: ['photos', 'comment'],
+      },
+    });
+    if (!response.ok) throw new Error('Erro ao pegar a foto.');
+    const data = (await response.json()) as PhotoData;
+    return { data, ok: true, error: '' };
+  } catch (error) {
+    return apiError(error);
+  }
 }
